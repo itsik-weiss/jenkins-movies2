@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage("build"){
+        stages("build"){
             step{
                 sh 'pwd'
                 sh 'docker build -t movies-jenkins:v1 .'
@@ -18,7 +18,7 @@ pipeline{
                 }
             }
         }
-        stage("test"){
+        stages("test"){
             step{
                 sh 'docker run -d -p 8090:80 movies-jenkins:v1'
                 sh 'sleep 5 && timeout 5 ping localhost:8090 -c 4 -p 8090'
