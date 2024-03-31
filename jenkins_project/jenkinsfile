@@ -3,23 +3,24 @@ pipeline{
     stages{
         stage("build"){
             step{
-                sh "docker build -t movies-jenkins:v1 ."
+                sh 'pwd'
+                sh 'docker build -t movies-jenkins:v1 .'
             }
             post{
                 always{
-                    sh "rm -f Dockerfile"
+                    sh 'rm -f Dockerfile'
                 }
                 success{
-                    echo "well done"
+                    echo 'well done'
                 }
                 failure{
-                    echo "ooops"
+                    echo 'ooops'
                 }
             }
         }
         stage("test"){
             step{
-                sh "docker run -d -p 8090:80 movies-jenkins:v1"
+                sh 'docker run -d -p 8090:80 movies-jenkins:v1'
                 sh 'sleep 5 && timeout 5 ping localhost:8090 -c 4 -p 8090'
             }
         }
