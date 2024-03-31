@@ -12,6 +12,7 @@ pipeline{
             }
             post{
                 always{
+                    sh 'docker rm -f $(docker ps -qa)'
                     sh 'rm -f Dockerfile'
                 }
                 success{
