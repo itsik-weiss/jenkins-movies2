@@ -5,9 +5,10 @@ pipeline{
             steps{
                 sh 'pwd'
                 sh 'ls -la'
-                dir 'jenkins_project'
-                sh 'ls -la'
-                sh 'docker build -t movies-jenkins:v1 .'
+                dir('jenkins_project'){
+                    sh 'ls -la'
+                    sh 'docker build -t movies-jenkins:v1 .'
+                }
             }
             post{
                 always{
